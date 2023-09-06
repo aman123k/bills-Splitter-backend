@@ -45,12 +45,13 @@ class userController {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         sameSite: "none",
         maxAge: 1000 * 60 * 60 * 24 * 30,
-        domain: ".vercel.com",
+        domain: "bills-splitter-frontend.vercel.app",
       });
 
       res.status(200).json({
         success: true,
         response: "User Loged In",
+        data: accessToken,
       });
     } else {
       res.status(400).json({
