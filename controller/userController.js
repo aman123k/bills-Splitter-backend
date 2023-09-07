@@ -39,15 +39,12 @@ class userController {
     if (comparePass) {
       const accessToken = createToken(userDetais);
       res.cookie("accessToken", accessToken, {
-        // httpsOnly: true,
-        // secure: true,
-        // path: "/",
-        // expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        // sameSite: "none",
-        // domain: "bills-splitter-frontend.vercel.app",
-        domain: ".vercel.app", // Set the domain
-        maxAge: 30 * 24 * 60 * 60 * 1000, // Set the expiration time in milliseconds (30 days in this example)
         httpOnly: true,
+        secure: true,
+        path: "/",
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        sameSite: "none",
+        domain: "bills-splitter-frontend",
       });
 
       res.status(200).json({
