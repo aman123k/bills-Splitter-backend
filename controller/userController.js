@@ -85,8 +85,8 @@ class userController {
           success: true,
           response: "User logOut",
         });
-        console.log("helo");
       }
+      res.end();
     } catch {
       res.status(400).json({
         success: false,
