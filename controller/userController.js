@@ -80,7 +80,7 @@ class userController {
     const userDetais = verifyToken(token);
     try {
       if (userDetais) {
-        cookies.set("accessToken", { expires: Date.now() });
+        res.cookies("accessToken", { expires: Date.now() });
         res.status(200).json({
           success: true,
           response: "User logOut",
