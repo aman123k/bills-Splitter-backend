@@ -44,7 +44,6 @@ class userController {
         path: "/",
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         sameSite: "none",
-        domain: "bills-splitter-frontend",
       });
 
       res.status(200).json({
