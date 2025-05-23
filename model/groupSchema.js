@@ -7,6 +7,9 @@ const groupSchema = mongoose.Schema({
   groupType: { type: String, requied: true },
   createrId: { type: String },
   time: { type: String, requied: true },
+  totalExpensesAmount: { type: Number, trim: true },
+  totalExpenses: { type: Number, trim: true },
+  totalSettledExpenses: { type: Number, trim: true },
 });
 
 // model for user Schema
