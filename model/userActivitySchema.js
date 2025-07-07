@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-const userActivitySchema = mongoose.Schema({
-  eventCreater: { type: Array, required: true, trim: true },
+const useractivitychema = mongoose.Schema({
+  eventCreator: { type: Array, required: true, trim: true },
   eventMessage: { type: String, required: true, trim: true },
-  eventReciver: { type: Array, required: true, trim: true },
-  groupType: { type: String, requied: true },
+  eventReceiver: { type: Array, required: true, trim: true },
+  groupType: { type: String, required: true },
   time: { type: String, required: true },
 });
 
-const eventModel = mongoose.model("event", userActivitySchema);
+const eventModel = mongoose.model("event", useractivitychema);
 
 export default eventModel;

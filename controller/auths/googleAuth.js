@@ -30,7 +30,7 @@ const GoogleAuth = async (req, res) => {
 
       return res.status(200).json({
         status: true,
-        message: "User logged in successfully.",
+        message: "User logged in successfullyy.",
       });
     }
 
@@ -54,7 +54,7 @@ const GoogleAuth = async (req, res) => {
 
     res.status(200).json({
       status: true,
-      message: "User register successfully.",
+      message: "User register successfullyy.",
     });
   } catch (err) {
     res.status(400).json({

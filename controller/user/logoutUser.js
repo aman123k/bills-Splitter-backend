@@ -3,8 +3,8 @@ import { verifyToken } from "../../token/jwtToken.js";
 const logOutUser = async (req, res) => {
   try {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
-    if (userDetais) {
+    const userDetails = verifyToken(token);
+    if (userDetails) {
       res.cookie("accessToken", "", {
         httpOnly: true,
         secure: true,

@@ -5,18 +5,18 @@ import { verifyToken } from "../token/jwtToken.js";
 class responseController {
   static allGroups = async (req, res) => {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
 
     try {
       const user = {
-        name: userDetais.user.name,
-        email: userDetais.user.email,
+        name: userDetails.user.name,
+        email: userDetails.user.email,
         settlement: false,
       };
       const groups = await groupModel.find({
         $or: [
-          { createrId: userDetais.user.email },
-          { "member.email": userDetais.user.email },
+          { creatorId: userDetails.user.email },
+          { "member.email": userDetails.user.email },
         ],
       });
       res.status(200).json({
@@ -34,14 +34,14 @@ class responseController {
       }
       res.status(400).json({
         success: false,
-        response: "Somthing is worng",
+        response: "Something is wrong",
       });
     }
   };
 
   static getGroupMembers = async (req, res) => {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
     try {
       const groups = await groupModel.find({
         _id: req.body.id,
@@ -55,7 +55,9 @@ class responseController {
         res.status(200).json({
           success: true,
           response: groups,
-          data: [{ name: userDetais.user.name, email: userDetais.user.email }],
+          data: [
+            { name: userDetails.user.name, email: userDetails.user.email },
+          ],
         });
       }
     } catch {
@@ -68,12 +70,12 @@ class responseController {
 
   static getExpense = async (req, res) => {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
     try {
       const expenses = await expenseModel.find({
         $and: [
           { groupId: req.body.id },
-          { "participants.email": userDetais.user.email },
+          { "participants.email": userDetails.user.email },
         ],
       });
       res.status(200).json({
@@ -89,15 +91,15 @@ class responseController {
   };
   static getAllBills = async (req, res) => {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
     try {
       const expenses = await expenseModel.find({
-        "participants.email": userDetais.user.email,
+        "participants.email": userDetails.user.email,
       });
       res.status(200).json({
         success: true,
         response: expenses,
-        data: [{ name: userDetais.user.name, email: userDetais.user.email }],
+        data: [{ name: userDetails.user.name, email: userDetails.user.email }],
       });
     } catch {
       res.status(400).json({
@@ -107,20 +109,20 @@ class responseController {
     }
   };
 
-  static getactivitys = async (req, res) => {
+  static getActivity = async (req, res) => {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
     try {
       const groups = await eventModel.find({
         $or: [
-          { eventCreater: userDetais.user.email },
-          { "eventReciver.email": userDetais.user.email },
+          { eventCreator: userDetails.user.email },
+          { "eventReceiver.email": userDetails.user.email },
         ],
       });
       res.status(200).json({
         success: true,
         response: groups,
-        data: { name: userDetais.user.name, email: userDetais.user.email },
+        data: { name: userDetails.user.name, email: userDetails.user.email },
       });
     } catch (err) {
       if (!token) {
@@ -132,7 +134,7 @@ class responseController {
       }
       res.status(400).json({
         success: false,
-        response: "Somthing is worng",
+        response: "Something is wrong",
       });
     }
   };

@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 
 const expanseSchema = mongoose.Schema({
-  expenseName: { type: String, trim: true, requied: true, toUpperCase: true },
-  amount: { type: Number, requied: true },
+  expenseName: { type: String, trim: true, required: true, toUpperCase: true },
+  amount: { type: Number, required: true },
+  time: { type: String, required: true },
   upiId: { type: String },
-  participants: { type: Array },
-  createrId: { type: String, requied: true },
-  groupId: { type: String, requied: true },
+  splitBetween: { type: Array },
+  location: { type: String },
+  paidBy: { type: String, required: true },
+  groupId: { type: String, required: true },
 });
 const expenseModel = mongoose.model("expense", expanseSchema);
 

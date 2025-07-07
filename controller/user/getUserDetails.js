@@ -3,11 +3,11 @@ import { verifyToken } from "../../token/jwtToken.js";
 const getUserInfo = async (req, res) => {
   try {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
     res.status(200).json({
       status: true,
       message: "",
-      data: userDetais.user,
+      data: userDetails.user,
     });
   } catch {
     res.status(400).json({

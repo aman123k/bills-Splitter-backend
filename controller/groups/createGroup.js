@@ -5,31 +5,31 @@ import { verifyToken } from "../../token/jwtToken.js";
 const createGroups = async (req, res) => {
   try {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
     if (!token)
       return res.status(400).json({
         success: false,
         response: "Token not found",
       });
-    const createrDetails = {
-      name: userDetais.user.name,
-      email: userDetais.user.email,
+    const creatorDetails = {
+      name: userDetails.user.name,
+      email: userDetails.user.email,
       settlement: false,
     };
     const { groupName, member, groupType } = req.body;
-    member.push(createrDetails);
+    member.push(creatorDetails);
 
     const docs = groupModel({
       groupName: groupName,
       member: member,
       groupType: groupType,
-      createrId: userDetais.user.email,
+      creatorId: userDetails.user.email,
       time: new Date(),
     });
     const events = eventModel({
-      eventCreater: createrDetails,
-      eventMessage: `${createrDetails.name} created the group "${groupName}"`,
-      eventReciver: member,
+      eventCreator: creatorDetails,
+      eventMessage: `${creatorDetails.name} created the group "${groupName}"`,
+      eventReceiver: member,
       groupType: groupType,
       time: new Date(),
     });
@@ -37,7 +37,7 @@ const createGroups = async (req, res) => {
     const event = await events.save();
     res.status(201).json({
       status: true,
-      message: "Group Created Successfully",
+      message: "Group Created successfullyy",
     });
   } catch (err) {
     res.status(400).json({

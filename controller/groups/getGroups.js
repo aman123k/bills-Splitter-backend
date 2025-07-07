@@ -1,10 +1,10 @@
 import groupModel from "../../model/groupSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
 
-const getGropus = async (req, res) => {
+const getGroups = async (req, res) => {
   try {
     const token = req.cookies?.accessToken;
-    const userDetais = verifyToken(token);
+    const userDetails = verifyToken(token);
     if (!token)
       return res.status(400).json({
         success: false,
@@ -13,8 +13,8 @@ const getGropus = async (req, res) => {
     const groups = await groupModel
       .find({
         $or: [
-          { createrId: userDetais.user.email },
-          { "member.email": userDetais.user.email },
+          { creatorId: userDetails.user.email },
+          { "member.email": userDetails.user.email },
         ],
       })
       .sort({ time: -1 });
@@ -27,9 +27,9 @@ const getGropus = async (req, res) => {
     console.log("error while getting a groups", err);
     res.status(400).json({
       status: false,
-      message: "Somthing is worng",
+      message: "Something is wrong",
     });
   }
 };
 
-export default getGropus;
+export default getGroups;

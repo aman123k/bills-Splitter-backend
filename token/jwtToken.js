@@ -10,8 +10,8 @@ const createToken = (user) => {
 const verifyToken = (token) => {
   if (!token) return null;
   try {
-    const userDetais = Jwt.verify(token, secreteKey);
-    return userDetais;
+    const userDetails = Jwt.verify(token, secreteKey);
+    return userDetails;
   } catch {
     return null;
   }
