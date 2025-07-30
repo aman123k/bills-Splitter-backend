@@ -12,11 +12,13 @@ import createGroups from "../controller/groups/createGroup.js";
 import getGroups from "../controller/groups/getGroups.js";
 import getUserInfo from "../controller/user/getUserDetails.js";
 import logOutUser from "../controller/user/logoutUser.js";
+import createExpense from "../controller/expense/createExpense.js";
+import getExpenses from "../controller/expense/getExpense.js";
+import deleteGroup from "../controller/groups/deleteGroup.js";
 
 const router = express.Router();
 
-router.post("/group", groupController.createGroups);
-router.post("/createExpense", groupController.createExpense);
+// router.post("/createExpense", groupController.createExpense);
 router.get("/groups", responseController.allGroups);
 router.post("/getGroupMembers", responseController.getGroupMembers);
 router.post("/getExpense", responseController.getExpense);
@@ -33,8 +35,11 @@ router.post("/google", GoogleAuth);
 router.post("/registration", registerUser);
 router.post("/login", loginUser);
 router.post("/createGroup", createGroups);
+router.post("/createExpense", createExpense);
 router.get("/getGroup", getGroups);
 router.get("/getUserInformation", getUserInfo);
+router.get(`/getExpenses`, getExpenses);
 router.post("/logOut", logOutUser);
+router.delete("/deleteGroup", deleteGroup);
 
 export default router;

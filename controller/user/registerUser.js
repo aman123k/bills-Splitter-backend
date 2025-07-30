@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
       const result = await docs.save();
       res.status(201).json({
         status: true,
-        message: "User register successfullyy.",
+        message: "User register successfully.",
       });
     }
   } catch (error) {

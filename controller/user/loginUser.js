@@ -10,7 +10,7 @@ const loginUser = async (req, res) => {
     if (!existUser) {
       return res.status(400).json({
         success: false,
-        message: "User does't exsit.Please register",
+        message: "User does't exist.Please register",
       });
     }
     // Check user password
@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
 
       res.status(200).json({
         status: true,
-        message: "User logged in successfullyy.",
+        message: "User logged in successfully.",
       });
     } else {
       res.status(400).json({

@@ -1,8 +1,9 @@
-import groupModel from "../../model/groupSchema.js";
+import expenseModel from "../../model/expenseSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
 
-const getGroups = async (req, res) => {
+const getExpenses = async (req, res) => {
   try {
+    const id = req.query.id;
     const token = req.cookies?.accessToken;
     const userDetails = verifyToken(token);
     if (!token)
@@ -10,25 +11,20 @@ const getGroups = async (req, res) => {
         success: false,
         response: "Token not found",
       });
-    const groups = await groupModel
+    const expenses = await expenseModel
       .find({
-        $or: [
-          { creatorId: userDetails.user._id },
-          {
-            "members.email": {
-              $regex: new RegExp(`^${userDetails.user.email}$`, "i"),
-            },
-          },
-        ],
+        groupId: id,
       })
-      .sort({ time: -1 });
+      .populate("creatorId", "name email")
+      .sort({ createdAt: -1 });
+
     res.status(200).json({
       status: true,
       message: "",
-      data: groups,
+      data: expenses,
     });
   } catch (err) {
-    console.log("error while getting a groups", err);
+    console.log("error while getting a expenses", err);
     res.status(400).json({
       status: false,
       message: "Something is wrong",
@@ -36,4 +32,4 @@ const getGroups = async (req, res) => {
   }
 };
 
-export default getGroups;
+export default getExpenses;

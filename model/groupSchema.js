@@ -3,13 +3,17 @@ import mongoose from "mongoose";
 // Defining user Schema
 const groupSchema = mongoose.Schema({
   groupName: { type: String, trim: true, required: true, toUpperCase: true },
-  member: { type: Array, required: true },
+  members: { type: Array, required: true },
   groupType: { type: String, required: true },
-  creatorId: { type: String },
+  creatorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
   time: { type: String, required: true },
-  totalExpensesAmount: { type: Number, trim: true },
-  totalExpenses: { type: Number, trim: true },
-  totalSettledExpenses: { type: Number, trim: true },
+  totalExpensesAmount: { type: Number, default: 0 },
+  totalExpenses: { type: Number, default: 0 },
+  totalSettledExpenses: { type: Number, default: 0 },
 });
 
 // model for user Schema

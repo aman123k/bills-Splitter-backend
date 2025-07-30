@@ -33,7 +33,7 @@ class groupController {
       const event = await events.save();
       res.status(201).json({
         success: true,
-        response: "Group Created successfullyy",
+        response: "Group Created successfully",
       });
     } catch (err) {
       if (!token) {
@@ -79,7 +79,7 @@ class groupController {
       const event = await events.save();
       res.status(201).json({
         success: true,
-        response: "Expense Created successfullyy",
+        response: "Expense Created successfully",
       });
     } catch {
       res.status(400).json({
@@ -122,7 +122,7 @@ class groupController {
         const Event = await Events.save();
         res.status(201).json({
           success: true,
-          response: "Group & Expense deleted successfullyy",
+          response: "Group & Expense deleted successfully",
         });
       } else if (groupName) {
         const Events = eventModel({
@@ -137,7 +137,7 @@ class groupController {
         const event = await Events.save();
         res.status(201).json({
           success: true,
-          response: "Group deleted successfullyy",
+          response: "Group deleted successfully",
         });
       }
     } catch {
@@ -169,7 +169,7 @@ class groupController {
       const event = await doc.save();
       res.status(201).json({
         success: true,
-        response: "Expense deleted successfullyy",
+        response: "Expense deleted successfully",
       });
     } catch {
       res.status(400).json({
@@ -222,7 +222,7 @@ class groupController {
 
       res.status(200).json({
         success: true,
-        response: "Payment settled successfullyy",
+        response: "Payment settled successfully",
       });
     } catch {
       console.log("not delete");

@@ -1,15 +1,37 @@
 import mongoose from "mongoose";
 
-const expanseSchema = mongoose.Schema({
-  expenseName: { type: String, trim: true, required: true, toUpperCase: true },
-  amount: { type: Number, required: true },
-  time: { type: String, required: true },
-  upiId: { type: String },
-  splitBetween: { type: Array },
-  location: { type: String },
-  paidBy: { type: String, required: true },
-  groupId: { type: String, required: true },
+const expenseSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  paidBy: {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+  },
+  groupId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "group",
+    required: true,
+  },
+  creatorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
+  splitBetween: { type: Array, required: true },
+  expenseType: { type: String, required: true },
+  expenseNote: { type: String, trim: true },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
-const expenseModel = mongoose.model("expense", expanseSchema);
+
+const expenseModel = mongoose.model("expense", expenseSchema);
 
 export default expenseModel;

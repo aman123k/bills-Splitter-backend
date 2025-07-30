@@ -16,20 +16,21 @@ const createGroups = async (req, res) => {
       email: userDetails.user.email,
       settlement: false,
     };
-    const { groupName, member, groupType } = req.body;
-    member.push(creatorDetails);
+
+    const { groupName, members, groupType } = req.body;
+    members.unshift(creatorDetails);
 
     const docs = groupModel({
       groupName: groupName,
-      member: member,
+      members: members,
       groupType: groupType,
-      creatorId: userDetails.user.email,
+      creatorId: userDetails.user._id,
       time: new Date(),
     });
     const events = eventModel({
       eventCreator: creatorDetails,
       eventMessage: `${creatorDetails.name} created the group "${groupName}"`,
-      eventReceiver: member,
+      eventReceiver: members,
       groupType: groupType,
       time: new Date(),
     });
@@ -37,7 +38,7 @@ const createGroups = async (req, res) => {
     const event = await events.save();
     res.status(201).json({
       status: true,
-      message: "Group Created successfullyy",
+      message: "Group Created successfully",
     });
   } catch (err) {
     res.status(400).json({
