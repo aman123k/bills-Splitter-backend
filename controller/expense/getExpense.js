@@ -6,7 +6,7 @@ const getExpenses = async (req, res) => {
     const id = req.query.id;
     const token = req.cookies?.accessToken;
     const userDetails = verifyToken(token);
-    if (!token)
+    if (!userDetails)
       return res.status(400).json({
         success: false,
         response: "Token not found",

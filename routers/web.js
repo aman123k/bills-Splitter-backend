@@ -17,10 +17,10 @@ import deleteGroup from "../controller/groups/deleteGroup.js";
 import deleteExpense from "../controller/expense/deleteExpense.js";
 import getBalance from "../controller/expense/getBalance.js";
 import settlementExpense from "../controller/expense/settlementExpense.js";
+import getAllBills from "../controller/bills/getAllBills.js";
 
 const router = express.Router();
 
-router.get("/getAllBills", responseController.getAllBills);
 router.get("/activity", responseController.getActivity);
 
 // POST ROUTS
@@ -37,6 +37,7 @@ router.get("/getGroup", getGroups);
 router.get("/getUserInformation", getUserInfo);
 router.get(`/getExpenses`, getExpenses);
 router.get(`/getBalance`, getBalance);
+router.get(`/getAllBills`, getAllBills);
 
 // DELETE ROUTS
 router.delete("/deleteGroup", deleteGroup);

@@ -42,7 +42,7 @@ const createExpense = async (req, res) => {
       {
         $inc: {
           totalExpensesAmount: amount,
-          totalExpenses: 1,
+          totalExpenses: splitBetween.length,
         },
       },
       { upsert: true, new: true }

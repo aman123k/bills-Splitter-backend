@@ -9,16 +9,21 @@ const deleteExpense = async (req, res) => {
     const id = req.query.expenseId;
     const currentExpense = await expenseModel.findById(id);
     const deleteExpenses = await expenseModel.findByIdAndDelete(id);
-    await groupModel.findOneAndUpdate(
-      { _id: currentExpense?.groupId },
-      {
-        $inc: {
-          totalExpensesAmount: -currentExpense?.amount,
-          totalExpenses: -1,
+    const currentGroup = await groupModel.findById(currentExpense.groupId);
+
+    // Proceed only if currentGroup exists and has a totalExpensesAmount greater than 0
+    if (currentGroup?.totalExpensesAmount > 0) {
+      await groupModel.findOneAndUpdate(
+        { _id: currentExpense.groupId },
+        {
+          $inc: {
+            totalExpensesAmount: -currentExpense.amount,
+            totalExpenses: -1,
+          },
         },
-      },
-      { upsert: true, new: true }
-    );
+        { new: true }
+      );
+    }
 
     res.status(200).json({
       status: true,
