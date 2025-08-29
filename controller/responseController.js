@@ -1,6 +1,6 @@
 import expenseModel from "../model/expenseSchema.js";
 import groupModel from "../model/groupSchema.js";
-import eventModel from "../model/userActivitySchema.js";
+import eventModel from "../model/activitySchema.js";
 import { verifyToken } from "../token/jwtToken.js";
 class responseController {
   static allGroups = async (req, res) => {

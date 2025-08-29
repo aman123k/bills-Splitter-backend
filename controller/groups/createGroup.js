@@ -1,5 +1,5 @@
 import groupModel from "../../model/groupSchema.js";
-import eventModel from "../../model/userActivitySchema.js";
+import eventModel from "../../model/activitySchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
 
 const createGroups = async (req, res) => {
@@ -27,15 +27,9 @@ const createGroups = async (req, res) => {
       creatorId: userDetails.user._id,
       time: new Date(),
     });
-    const events = eventModel({
-      eventCreator: creatorDetails,
-      eventMessage: `${creatorDetails.name} created the group "${groupName}"`,
-      eventReceiver: members,
-      groupType: groupType,
-      time: new Date(),
-    });
+
     const result = await docs.save();
-    const event = await events.save();
+
     res.status(201).json({
       status: true,
       message: "Group Created successfully",

@@ -18,6 +18,7 @@ import deleteExpense from "../controller/expense/deleteExpense.js";
 import getBalance from "../controller/expense/getBalance.js";
 import settlementExpense from "../controller/expense/settlementExpense.js";
 import getAllBills from "../controller/bills/getAllBills.js";
+import getAllActivities from "../controller/bills/getAllActivities.js";
 
 const router = express.Router();
 
@@ -38,6 +39,7 @@ router.get("/getUserInformation", getUserInfo);
 router.get(`/getExpenses`, getExpenses);
 router.get(`/getBalance`, getBalance);
 router.get(`/getAllBills`, getAllBills);
+router.get(`/getAllActivities`, getAllActivities);
 
 // DELETE ROUTS
 router.delete("/deleteGroup", deleteGroup);

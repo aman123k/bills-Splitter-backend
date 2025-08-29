@@ -1,3 +1,4 @@
+import activityModal from "../../model/activitySchema.js";
 import expenseModel from "../../model/expenseSchema.js";
 import groupModel from "../../model/groupSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
@@ -37,6 +38,16 @@ const settlementExpense = async (req, res) => {
       },
       { upsert: true, new: true }
     );
+    const docs = activityModal({
+      message: `${userDetails?.user?.name} paid`,
+      expenseId: settlementExpense?._id,
+      groupId: groupId,
+      creatorId: userDetails?.user?._id,
+      splitBetween: settlementExpense?.splitBetween,
+      activityType: "paid",
+    });
+
+    await docs.save();
     res.status(200).json({
       status: true,
       message: "Payment settled successfully",
