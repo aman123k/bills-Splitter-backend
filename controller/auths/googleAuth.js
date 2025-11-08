@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import userModel from "../../model/userSchema.js";
 import { createToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const GoogleAuth = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ const GoogleAuth = async (req, res) => {
       if (existUser?.loginWith !== "google") {
         return res.status(400).json({
           status: false,
-          message: `User exists. Please log in with ${existUser?.loginWith}`,
+          message: `${MESSAGES.USER_EXISTS_LOGIN_WITH} ${existUser?.loginWith}`,
         });
       }
 
@@ -30,7 +31,7 @@ const GoogleAuth = async (req, res) => {
 
       return res.status(200).json({
         status: true,
-        message: "User logged in successfully.",
+        message: MESSAGES.USER_LOGGED_IN,
       });
     }
 
@@ -54,12 +55,12 @@ const GoogleAuth = async (req, res) => {
 
     res.status(200).json({
       status: true,
-      message: "User register successfully.",
+      message: MESSAGES.USER_REGISTERED,
     });
   } catch (err) {
     res.status(400).json({
       status: false,
-      message: "Server error",
+      message: MESSAGES.SERVER_ERROR,
     });
     console.log("error while authenticate with google", err);
   }

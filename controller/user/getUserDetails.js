@@ -1,4 +1,5 @@
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const getUserInfo = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ const getUserInfo = async (req, res) => {
   } catch {
     res.status(400).json({
       status: false,
-      message: "Server error",
+      message: MESSAGES.SERVER_ERROR,
     });
   }
 };

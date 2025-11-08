@@ -2,6 +2,7 @@ import activityModal from "../../model/activitySchema.js";
 import expenseModel from "../../model/expenseSchema.js";
 import groupModel from "../../model/groupSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const createExpense = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ const createExpense = async (req, res) => {
     if (!token)
       return res.status(400).json({
         success: false,
-        response: "Token not found",
+        response: MESSAGES.TOKEN_NOT_FOUND,
       });
     const {
       id,
@@ -68,12 +69,12 @@ const createExpense = async (req, res) => {
     await docs.save();
     res.status(201).json({
       status: true,
-      message: "Expense Created successfully",
+      message: MESSAGES.EXPENSE_CREATED,
     });
   } catch (err) {
     res.status(400).json({
       status: false,
-      message: "Server error",
+      message: MESSAGES.SERVER_ERROR,
     });
     console.log("error while creating a expense", err);
   }

@@ -1,5 +1,4 @@
 import express from "express";
-import responseController from "../controller/responseController.js";
 
 // auths file
 import GoogleAuth from "../controller/auths/googleAuth.js";
@@ -21,8 +20,6 @@ import getAllBills from "../controller/bills/getAllBills.js";
 import getAllActivities from "../controller/bills/getAllActivities.js";
 
 const router = express.Router();
-
-router.get("/activity", responseController.getActivity);
 
 // POST ROUTS
 router.post("/google", GoogleAuth);

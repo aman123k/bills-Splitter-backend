@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import userModel from "../../model/userSchema.js";
 import { createToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const loginUser = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ const loginUser = async (req, res) => {
     if (!existUser) {
       return res.status(400).json({
         success: false,
-        message: "User does't exist.Please register",
+        message: MESSAGES.USER_NOT_EXIST,
       });
     }
     // Check user password
@@ -29,18 +30,18 @@ const loginUser = async (req, res) => {
 
       res.status(200).json({
         status: true,
-        message: "User logged in successfully.",
+        message: MESSAGES.USER_LOGGED_IN,
       });
     } else {
       res.status(400).json({
         status: false,
-        message: "Password does't match",
+        message: MESSAGES.PASSWORD_MISMATCH,
       });
     }
   } catch (error) {
     res.status(400).json({
       status: false,
-      message: "Server error",
+      message: MESSAGES.SERVER_ERROR,
     });
     console.log("error while login user with password", error);
   }

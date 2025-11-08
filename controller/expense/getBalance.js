@@ -1,5 +1,6 @@
 import expenseModel from "../../model/expenseSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const getBalance = async (req, res) => {
   try {
@@ -52,7 +53,7 @@ const getBalance = async (req, res) => {
     console.log("error while getting balance", err);
     res.status(400).json({
       status: false,
-      message: "Something is wrong",
+      message: MESSAGES.SOMETHING_WRONG,
     });
   }
 };

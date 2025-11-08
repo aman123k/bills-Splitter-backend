@@ -1,5 +1,6 @@
 import expenseModel from "../../model/expenseSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const getExpenses = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ const getExpenses = async (req, res) => {
     if (!userDetails)
       return res.status(400).json({
         success: false,
-        response: "Token not found",
+        response: MESSAGES.TOKEN_NOT_FOUND,
       });
     const expenses = await expenseModel
       .find({
@@ -27,7 +28,7 @@ const getExpenses = async (req, res) => {
     console.log("error while getting a expenses", err);
     res.status(400).json({
       status: false,
-      message: "Something is wrong",
+      message: MESSAGES.SOMETHING_WRONG,
     });
   }
 };

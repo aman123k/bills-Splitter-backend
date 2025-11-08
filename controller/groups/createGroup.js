@@ -1,6 +1,7 @@
 import groupModel from "../../model/groupSchema.js";
 import eventModel from "../../model/activitySchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const createGroups = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ const createGroups = async (req, res) => {
     if (!token)
       return res.status(400).json({
         success: false,
-        response: "Token not found",
+        response: MESSAGES.TOKEN_NOT_FOUND,
       });
     const creatorDetails = {
       name: userDetails.user.name,
@@ -32,12 +33,12 @@ const createGroups = async (req, res) => {
 
     res.status(201).json({
       status: true,
-      message: "Group Created successfully",
+      message: MESSAGES.GROUP_CREATED,
     });
   } catch (err) {
     res.status(400).json({
       status: false,
-      message: "Server error",
+      message: MESSAGES.SERVER_ERROR,
     });
     console.log("error while creating a group", err);
   }

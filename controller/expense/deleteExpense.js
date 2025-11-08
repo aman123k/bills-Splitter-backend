@@ -1,6 +1,7 @@
 import expenseModel from "../../model/expenseSchema.js";
 import groupModel from "../../model/groupSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const deleteExpense = async (req, res) => {
   try {
@@ -33,7 +34,7 @@ const deleteExpense = async (req, res) => {
     console.log("error while deleting an expense", err);
     res.status(400).json({
       status: false,
-      message: "Something is wrong",
+      message: MESSAGES.SOMETHING_WRONG,
     });
   }
 };

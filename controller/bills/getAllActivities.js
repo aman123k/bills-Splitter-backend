@@ -1,5 +1,6 @@
 import activityModal from "../../model/activitySchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const getAllActivities = async (req, res) => {
   try {
@@ -8,7 +9,7 @@ const getAllActivities = async (req, res) => {
     if (!userDetails)
       return res.status(400).json({
         success: false,
-        response: "Token not found",
+        response: MESSAGES.TOKEN_NOT_FOUND,
       });
     const allActivities = await activityModal
       .find({
@@ -32,7 +33,7 @@ const getAllActivities = async (req, res) => {
     console.log("error while getting a all bills", err);
     res.status(400).json({
       status: false,
-      message: "Something is wrong",
+      message: MESSAGES.SOMETHING_WRONG,
     });
   }
 };

@@ -1,4 +1,5 @@
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const logOutUser = async (req, res) => {
   try {
@@ -14,13 +15,13 @@ const logOutUser = async (req, res) => {
       });
       res.status(200).json({
         status: true,
-        message: "User logOut",
+        message: MESSAGES.USER_LOGGED_OUT,
       });
     }
   } catch {
     res.status(400).json({
       status: false,
-      message: "Please logIn",
+      message: MESSAGES.PLEASE_LOGIN,
     });
   }
 };

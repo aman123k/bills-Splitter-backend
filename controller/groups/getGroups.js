@@ -1,5 +1,6 @@
 import groupModel from "../../model/groupSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const getGroups = async (req, res) => {
   try {
@@ -8,7 +9,7 @@ const getGroups = async (req, res) => {
     if (!token)
       return res.status(400).json({
         success: false,
-        response: "Token not found",
+        response: MESSAGES.TOKEN_NOT_FOUND,
       });
     const groups = await groupModel
       .find({
@@ -31,7 +32,7 @@ const getGroups = async (req, res) => {
     console.log("error while getting a groups", err);
     res.status(400).json({
       status: false,
-      message: "Something is wrong",
+      message: MESSAGES.SOMETHING_WRONG,
     });
   }
 };

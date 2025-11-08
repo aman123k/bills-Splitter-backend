@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import userModel from "../../model/userSchema.js";
+import MESSAGES from "../../variable/variable.js";
 
 const registerUser = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ const registerUser = async (req, res) => {
     if (existUser) {
       return res.status(400).json({
         status: false,
-        message: `User exists. Please log in with ${existUser?.loginWith}`,
+        message: `${MESSAGES.USER_EXISTS_LOGIN_WITH} ${existUser?.loginWith}`,
       });
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
@@ -23,13 +24,13 @@ const registerUser = async (req, res) => {
       const result = await docs.save();
       res.status(201).json({
         status: true,
-        message: "User register successfully.",
+        message: MESSAGES.USER_REGISTERED,
       });
     }
   } catch (error) {
     res.status(400).json({
       status: false,
-      message: "Server error",
+      message: MESSAGES.SERVER_ERROR,
     });
     console.log("error while register user with password", error);
   }

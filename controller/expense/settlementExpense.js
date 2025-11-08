@@ -2,6 +2,7 @@ import activityModal from "../../model/activitySchema.js";
 import expenseModel from "../../model/expenseSchema.js";
 import groupModel from "../../model/groupSchema.js";
 import { verifyToken } from "../../token/jwtToken.js";
+import MESSAGES from "../../variable/variable.js";
 
 const settlementExpense = async (req, res) => {
   try {
@@ -50,13 +51,13 @@ const settlementExpense = async (req, res) => {
     await docs.save();
     res.status(200).json({
       status: true,
-      message: "Payment settled successfully",
+      message: MESSAGES.PAYMENT_SETTLED,
     });
   } catch (err) {
     console.log("error while setting an expenses", err);
     res.status(400).json({
       status: false,
-      message: "Something is wrong",
+      message: MESSAGES.SOMETHING_WRONG,
     });
   }
 };
